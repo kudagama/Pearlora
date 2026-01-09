@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { ShoppingBag, Menu, X, Search, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
-export default function Navbar({ cartCount = 0, onCartClick }) {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { cartCount, toggleCart } = useCart();
 
   return (
     <nav className="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm border-b border-softpink/20">
@@ -20,10 +22,6 @@ export default function Navbar({ cartCount = 0, onCartClick }) {
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-gray-600 hover:text-gold transition-colors font-medium">Home</Link>
             <Link to="/products" className="text-gray-600 hover:text-gold transition-colors font-medium">Shop</Link>
-            {/* Keeping Collections as a placeholder or pointing to products for now, or just remove it if not asked.
-                The prompt asked for 'Home, Products, About, Contact'.
-                The existing code had 'Home, Shop, Collections, About'.
-                I will align with prompt: Home, Products (Shop), About, Contact. */}
             <Link to="/products" className="text-gray-600 hover:text-gold transition-colors font-medium">Products</Link>
             <Link to="/about" className="text-gray-600 hover:text-gold transition-colors font-medium">About</Link>
             <Link to="/contact" className="text-gray-600 hover:text-gold transition-colors font-medium">Contact</Link>
@@ -39,7 +37,7 @@ export default function Navbar({ cartCount = 0, onCartClick }) {
             </button>
             <button
               className="text-gray-600 hover:text-gold transition-colors relative"
-              onClick={onCartClick}
+              onClick={toggleCart}
             >
               <ShoppingBag className="w-5 h-5" />
               {cartCount > 0 && (
@@ -85,7 +83,7 @@ export default function Navbar({ cartCount = 0, onCartClick }) {
                  className="text-gray-600 hover:text-gold flex flex-col items-center relative"
                  onClick={() => {
                    setIsOpen(false);
-                   if (onCartClick) onCartClick();
+                   toggleCart();
                  }}
                >
                   <ShoppingBag className="w-5 h-5 mb-1" />
