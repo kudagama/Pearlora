@@ -1,24 +1,29 @@
-import React, { useMemo } from 'react';
-import { X, Trash2, ArrowRight } from 'lucide-react';
+import React from 'react';
+import { X, Trash2, ArrowRight, Minus, Plus } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
-export default function CartSidebar({ isOpen, onClose, cartItems, removeFromCart }) {
-  const totalPrice = useMemo(() => {
-    return cartItems.reduce((total, item) => {
-      const price = parseFloat(item.price.replace('$', ''));
-      return total + price * item.quantity;
-    }, 0);
-  }, [cartItems]);
+export default function CartSidebar() {
+  const {
+    isCartOpen,
+    setIsCartOpen,
+    cartItems,
+    removeFromCart,
+    updateQuantity,
+    cartTotal
+  } = useCart();
+
+  const onClose = () => setIsCartOpen(false);
 
   return (
-    <div className={`fixed inset-0 z-50 overflow-hidden ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
+    <div className={`fixed inset-0 z-50 overflow-hidden ${isCartOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
       {/* Backdrop */}
       <div
-        className={`absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-500 ease-in-out ${isOpen ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-500 ease-in-out ${isCartOpen ? 'opacity-100' : 'opacity-0'}`}
         onClick={onClose}
         aria-hidden="true"
       />
 
-      <div className={`fixed inset-y-0 right-0 pl-10 max-w-full flex transition-transform duration-500 ease-in-out sm:pl-16 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed inset-y-0 right-0 pl-10 max-w-full flex transition-transform duration-500 ease-in-out sm:pl-16 ${isCartOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="w-screen max-w-md">
           <div className="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
             <div className="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
@@ -70,16 +75,31 @@ export default function CartSidebar({ isOpen, onClose, cartItems, removeFromCart
                               </div>
                               <p className="mt-1 text-sm text-gray-500">{item.category}</p>
                             </div>
-                            <div className="flex-1 flex items-end justify-between text-sm">
-                              <p className="text-gray-500">Qty {item.quantity}</p>
+                            <div className="flex-1 flex items-end justify-between text-sm mt-2">
+                              {/* Quantity Controls */}
+                              <div className="flex items-center border border-gray-300 rounded-md">
+                                <button
+                                  onClick={() => updateQuantity(item.id, -1)}
+                                  className="p-1 text-gray-600 hover:text-gold focus:outline-none"
+                                >
+                                  <Minus className="w-3 h-3" />
+                                </button>
+                                <span className="px-2 text-gray-900 text-sm font-medium">{item.quantity}</span>
+                                <button
+                                  onClick={() => updateQuantity(item.id, 1)}
+                                  className="p-1 text-gray-600 hover:text-gold focus:outline-none"
+                                >
+                                  <Plus className="w-3 h-3" />
+                                </button>
+                              </div>
 
                               <div className="flex">
                                 <button
                                   type="button"
                                   onClick={() => removeFromCart(item.id)}
-                                  className="font-medium text-red-500 hover:text-red-700 flex items-center"
+                                  className="font-medium text-red-500 hover:text-red-700 flex items-center text-sm"
                                 >
-                                  <Trash2 className="w-4 h-4 mr-1" />
+                                  <Trash2 className="w-3 h-3 mr-1" />
                                   Remove
                                 </button>
                               </div>
@@ -97,7 +117,7 @@ export default function CartSidebar({ isOpen, onClose, cartItems, removeFromCart
               <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                 <div className="flex justify-between text-base font-medium text-gray-900">
                   <p>Subtotal</p>
-                  <p>${totalPrice.toFixed(2)}</p>
+                  <p>${cartTotal.toFixed(2)}</p>
                 </div>
                 <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                 <div className="mt-6">

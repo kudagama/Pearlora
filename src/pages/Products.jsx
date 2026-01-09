@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import ProductGrid from '../components/ProductGrid';
 import productsData from '../data/products.json';
 
-export default function Products({ addToCart }) {
+export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   // Extract unique categories
@@ -41,7 +41,7 @@ export default function Products({ addToCart }) {
           ))}
         </div>
       </div>
-      <ProductGrid addToCart={addToCart} products={filteredProducts} />
+      <ProductGrid products={filteredProducts} />
     </div>
   );
 }

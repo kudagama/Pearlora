@@ -1,8 +1,10 @@
 import React from 'react';
 import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
-export default function ProductGrid({ addToCart, products }) {
+export default function ProductGrid({ products }) {
+  const { addToCart } = useCart();
   // Fallback to empty array if products is undefined
   const displayProducts = products || [];
 

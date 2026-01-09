@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ShoppingCart, ArrowLeft, Plus, Minus } from 'lucide-react';
 import productsData from '../data/products.json';
+import { useCart } from '../context/CartContext';
 
-export default function ProductDetail({ addToCart }) {
+export default function ProductDetail() {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
 
   const product = productsData.find((p) => p.id === parseInt(id));
 
