@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import ProductGrid from './components/ProductGrid';
 import CartSidebar from './components/CartSidebar';
+import Home from './pages/Home';
+import Products from './pages/Products';
+import Contact from './pages/Contact';
+import About from './pages/About';
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -30,29 +33,36 @@ function App() {
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-cream">
-      <Navbar
-        cartCount={totalItems}
-        onCartClick={() => setIsCartOpen(true)}
-      />
-      <CartSidebar
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        cartItems={cartItems}
-        removeFromCart={removeFromCart}
-      />
-      <Hero />
-      <ProductGrid addToCart={addToCart} />
+    <BrowserRouter>
+      <div className="min-h-screen bg-cream">
+        <Navbar
+          cartCount={totalItems}
+          onCartClick={() => setIsCartOpen(true)}
+        />
+        <CartSidebar
+          isOpen={isCartOpen}
+          onClose={() => setIsCartOpen(false)}
+          cartItems={cartItems}
+          removeFromCart={removeFromCart}
+        />
 
-      {/* Footer Placeholder */}
-      <footer className="bg-gray-50 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-           <p className="text-center text-base text-gray-400">
-             &copy; 2024 Pealora Inc. All rights reserved.
-           </p>
-        </div>
-      </footer>
-    </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products addToCart={addToCart} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+
+        {/* Footer Placeholder */}
+        <footer className="bg-gray-50 border-t border-gray-200 mt-auto">
+          <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+             <p className="text-center text-base text-gray-400">
+               &copy; 2024 Pealora Inc. All rights reserved.
+             </p>
+          </div>
+        </footer>
+      </div>
+    </BrowserRouter>
   );
 }
 
