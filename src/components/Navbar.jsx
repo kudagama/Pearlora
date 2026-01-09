@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ShoppingBag, Menu, X, Search, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar({ cartCount = 0, onCartClick }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -10,17 +11,22 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <a href="#" className="font-serif text-3xl font-bold text-gray-800 tracking-wide">
+            <Link to="/" className="font-serif text-3xl font-bold text-gray-800 tracking-wide">
               Pealora<span className="text-gold">.</span>
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-gray-600 hover:text-gold transition-colors font-medium">Home</a>
-            <a href="#" className="text-gray-600 hover:text-gold transition-colors font-medium">Shop</a>
-            <a href="#" className="text-gray-600 hover:text-gold transition-colors font-medium">Collections</a>
-            <a href="#" className="text-gray-600 hover:text-gold transition-colors font-medium">About</a>
+            <Link to="/" className="text-gray-600 hover:text-gold transition-colors font-medium">Home</Link>
+            <Link to="/products" className="text-gray-600 hover:text-gold transition-colors font-medium">Shop</Link>
+            {/* Keeping Collections as a placeholder or pointing to products for now, or just remove it if not asked.
+                The prompt asked for 'Home, Products, About, Contact'.
+                The existing code had 'Home, Shop, Collections, About'.
+                I will align with prompt: Home, Products (Shop), About, Contact. */}
+            <Link to="/products" className="text-gray-600 hover:text-gold transition-colors font-medium">Products</Link>
+            <Link to="/about" className="text-gray-600 hover:text-gold transition-colors font-medium">About</Link>
+            <Link to="/contact" className="text-gray-600 hover:text-gold transition-colors font-medium">Contact</Link>
           </div>
 
           {/* Icons */}
@@ -31,9 +37,16 @@ export default function Navbar() {
             <button className="text-gray-600 hover:text-gold transition-colors">
               <User className="w-5 h-5" />
             </button>
-            <button className="text-gray-600 hover:text-gold transition-colors relative">
+            <button
+              className="text-gray-600 hover:text-gold transition-colors relative"
+              onClick={onCartClick}
+            >
               <ShoppingBag className="w-5 h-5" />
-              <span className="absolute -top-2 -right-2 bg-softpink text-gray-800 text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-softpink text-gray-800 text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
             </button>
           </div>
 
@@ -53,10 +66,10 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-cream border-t border-softpink/20">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gold hover:bg-white">Home</a>
-            <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gold hover:bg-white">Shop</a>
-            <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gold hover:bg-white">Collections</a>
-            <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gold hover:bg-white">About</a>
+            <Link to="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gold hover:bg-white" onClick={() => setIsOpen(false)}>Home</Link>
+            <Link to="/products" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gold hover:bg-white" onClick={() => setIsOpen(false)}>Products</Link>
+            <Link to="/about" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gold hover:bg-white" onClick={() => setIsOpen(false)}>About</Link>
+            <Link to="/contact" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gold hover:bg-white" onClick={() => setIsOpen(false)}>Contact</Link>
           </div>
           <div className="pt-4 pb-4 border-t border-softpink/20">
              <div className="flex items-center justify-around px-5">
@@ -68,9 +81,15 @@ export default function Navbar() {
                   <User className="w-5 h-5 mb-1" />
                    <span className="text-xs">Account</span>
                </button>
-               <button className="text-gray-600 hover:text-gold flex flex-col items-center relative">
+               <button
+                 className="text-gray-600 hover:text-gold flex flex-col items-center relative"
+                 onClick={() => {
+                   setIsOpen(false);
+                   if (onCartClick) onCartClick();
+                 }}
+               >
                   <ShoppingBag className="w-5 h-5 mb-1" />
-                  <span className="text-xs">Cart (0)</span>
+                  <span className="text-xs">Cart ({cartCount})</span>
                </button>
              </div>
           </div>
