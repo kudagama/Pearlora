@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Eternal Rose Bouquet",
-    "price": "5.00",
+    "price": "$45.00",
     "category": "Flowers",
     "image_url": "https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "description": "A timeless arrangement of preserved roses that last for years, symbolizing eternal love."
@@ -10,7 +10,7 @@
   {
     "id": 2,
     "name": "Gourmet Truffle Cake",
-    "price": "2.00",
+    "price": "$32.00",
     "category": "Cakes",
     "image_url": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "description": "Rich, decadent chocolate truffle cake topped with fresh berries."
@@ -18,7 +18,7 @@
   {
     "id": 3,
     "name": "Golden Surprise Box",
-    "price": "9.00",
+    "price": "$89.00",
     "category": "Gift Boxes",
     "image_url": "https://images.unsplash.com/photo-1512909006721-3d6018887383?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "description": "A luxurious box filled with golden-wrapped treats and premium goodies."
@@ -26,7 +26,7 @@
   {
     "id": 4,
     "name": "Lavender Bliss Candles",
-    "price": "5.00",
+    "price": "$25.00",
     "category": "Wellness",
     "image_url": "https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "description": "Hand-poured soy wax candles with calming lavender essential oils."
@@ -34,7 +34,7 @@
   {
     "id": 5,
     "name": "Pearl Elegance Set",
-    "price": "20.00",
+    "price": "$120.00",
     "category": "Jewelry",
     "image_url": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "description": "A stunning necklace and earring set featuring genuine freshwater pearls."
@@ -42,7 +42,7 @@
   {
     "id": 6,
     "name": "Cuddly Teddy Bear",
-    "price": "8.00",
+    "price": "$28.00",
     "category": "Toys",
     "image_url": "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "description": "Soft and huggable teddy bear, perfect for comforting hugs."
@@ -50,7 +50,7 @@
   {
     "id": 7,
     "name": "Vintage Photo Frame",
-    "price": "5.00",
+    "price": "$35.00",
     "category": "Photo Frame",
     "image_url": "https://images.unsplash.com/photo-1582046487002-86d3e8e92f22?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "description": "Elegant brass photo frame to cherish your most precious memories."
@@ -58,7 +58,7 @@
   {
     "id": 8,
     "name": "Assorted Macarons",
-    "price": "0.00",
+    "price": "$40.00",
     "category": "Cakes",
     "image_url": "https://images.unsplash.com/photo-1569864358642-9d1684040f43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "description": "A colorful box of french macarons in various delightful flavors."

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShoppingCart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function ProductGrid({ addToCart, products }) {
   // Fallback to empty array if products is undefined
@@ -34,10 +35,10 @@ export default function ProductGrid({ addToCart, products }) {
               </div>
               <div className="p-6 flex-1 flex flex-col">
                 <h3 className="text-lg font-serif font-semibold text-gray-900 mb-2">
-                  <a href="#">
+                  <Link to={`/product/${product.id}`}>
                     <span aria-hidden="true" className="absolute inset-0" />
                     {product.name}
-                  </a>
+                  </Link>
                 </h3>
                 <p className="text-sm text-gray-500 mb-3 line-clamp-2">{product.description}</p>
                 <p className="text-xl font-bold text-gold mb-4">{product.price}</p>
