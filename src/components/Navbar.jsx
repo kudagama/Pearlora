@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ShoppingBag, Menu, X, Search, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { motion } from 'framer-motion';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,13 +30,21 @@ export default function Navbar() {
 
           {/* Icons */}
           <div className="hidden md:flex items-center space-x-6">
-            <button className="text-gray-600 hover:text-gold transition-colors">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              className="text-gray-600 hover:text-gold transition-colors"
+            >
               <Search className="w-5 h-5" />
-            </button>
-            <button className="text-gray-600 hover:text-gold transition-colors">
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              className="text-gray-600 hover:text-gold transition-colors"
+            >
               <User className="w-5 h-5" />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               className="text-gray-600 hover:text-gold transition-colors relative"
               onClick={toggleCart}
             >
@@ -45,7 +54,7 @@ export default function Navbar() {
                   {cartCount}
                 </span>
               )}
-            </button>
+            </motion.button>
           </div>
 
           {/* Mobile menu button */}

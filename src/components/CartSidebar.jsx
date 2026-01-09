@@ -2,6 +2,7 @@ import React from 'react';
 import { X, Trash2, ArrowRight, Minus, Plus } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function CartSidebar() {
   const {
@@ -122,14 +123,16 @@ export default function CartSidebar() {
                 </div>
                 <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                 <div className="mt-6">
-                  <Link
-                    to="/checkout"
-                    onClick={onClose}
-                    className="flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-900 hover:bg-gold transition-colors duration-300"
-                  >
-                    Proceed to Checkout
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Link>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Link
+                      to="/checkout"
+                      onClick={onClose}
+                      className="flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-900 hover:bg-gold transition-colors duration-300"
+                    >
+                      Proceed to Checkout
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </Link>
+                  </motion.div>
                 </div>
                 <div className="mt-6 flex justify-center text-sm text-center text-gray-500">
                   <p>

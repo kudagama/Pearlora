@@ -2,11 +2,27 @@ import React from 'react';
 import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { motion } from 'framer-motion';
 
 export default function ProductGrid({ products }) {
   const { addToCart } = useCart();
   // Fallback to empty array if products is undefined
   const displayProducts = products || [];
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
 
   return (
     <section className="py-16 bg-white" id="shop">
@@ -20,14 +36,26 @@ export default function ProductGrid({ products }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           {displayProducts.map((product) => (
-            <div key={product.id} className="group relative bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100 overflow-hidden flex flex-col">
+            <motion.div
+              key={product.id}
+              className="group relative bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100 overflow-hidden flex flex-col"
+              variants={item}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
               <div className="relative aspect-square h-64 overflow-hidden bg-gray-200">
                 <img
                   src={product.image_url}
                   alt={product.name}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover object-center"
                 />
                 <div className="absolute top-2 right-2">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-cream text-gray-800 shadow-sm border border-gold/20">
@@ -45,18 +73,20 @@ export default function ProductGrid({ products }) {
                 <p className="text-sm text-gray-500 mb-3 line-clamp-2">{product.description}</p>
                 <p className="text-xl font-bold text-gold mb-4">{product.price}</p>
                 <div className="mt-auto">
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                     onClick={() => addToCart(product)}
                     className="relative w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gray-900 hover:bg-gold transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold z-10"
                   >
                     <ShoppingCart className="w-4 h-4 mr-2" />
                     Add to Cart
-                  </button>
+                  </motion.button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Mail, MapPin, Phone, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -85,12 +86,14 @@ export default function Footer() {
                 className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-md text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold"
                 placeholder="Enter your email"
               />
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 type="submit"
                 className="px-4 py-2 bg-gold text-white rounded-r-md hover:bg-yellow-600 transition-colors flex items-center"
               >
                 <ArrowRight className="h-5 w-5" />
-              </button>
+              </motion.button>
             </form>
           </div>
         </div>
