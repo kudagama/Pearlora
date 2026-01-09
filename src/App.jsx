@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
 import CartSidebar from './components/CartSidebar';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
@@ -14,27 +15,22 @@ function App() {
   return (
     <CartProvider>
       <BrowserRouter>
-        <div className="min-h-screen bg-cream">
+        <div className="min-h-screen bg-cream flex flex-col">
           <Navbar />
           <CartSidebar />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </main>
 
-          {/* Footer Placeholder */}
-          <footer className="bg-gray-50 border-t border-gray-200 mt-auto">
-            <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-               <p className="text-center text-base text-gray-400">
-                 &copy; 2024 Pealora Inc. All rights reserved.
-               </p>
-            </div>
-          </footer>
+          <Footer />
         </div>
       </BrowserRouter>
     </CartProvider>
