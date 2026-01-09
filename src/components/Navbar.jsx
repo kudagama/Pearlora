@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ShoppingBag, Menu, X, Search, User } from 'lucide-react';
 
-export default function Navbar() {
+export default function Navbar({ cartCount = 0, onCartClick }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -31,9 +31,16 @@ export default function Navbar() {
             <button className="text-gray-600 hover:text-gold transition-colors">
               <User className="w-5 h-5" />
             </button>
-            <button className="text-gray-600 hover:text-gold transition-colors relative">
+            <button
+              className="text-gray-600 hover:text-gold transition-colors relative"
+              onClick={onCartClick}
+            >
               <ShoppingBag className="w-5 h-5" />
-              <span className="absolute -top-2 -right-2 bg-softpink text-gray-800 text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-softpink text-gray-800 text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
             </button>
           </div>
 
@@ -68,9 +75,15 @@ export default function Navbar() {
                   <User className="w-5 h-5 mb-1" />
                    <span className="text-xs">Account</span>
                </button>
-               <button className="text-gray-600 hover:text-gold flex flex-col items-center relative">
+               <button
+                 className="text-gray-600 hover:text-gold flex flex-col items-center relative"
+                 onClick={() => {
+                   setIsOpen(false);
+                   if (onCartClick) onCartClick();
+                 }}
+               >
                   <ShoppingBag className="w-5 h-5 mb-1" />
-                  <span className="text-xs">Cart (0)</span>
+                  <span className="text-xs">Cart ({cartCount})</span>
                </button>
              </div>
           </div>

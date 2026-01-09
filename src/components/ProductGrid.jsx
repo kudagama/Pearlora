@@ -46,7 +46,7 @@ const products = [
   },
 ];
 
-export default function ProductGrid() {
+export default function ProductGrid({ addToCart }) {
   return (
     <section className="py-16 bg-white" id="shop">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,7 +83,10 @@ export default function ProductGrid() {
                 </h3>
                 <p className="text-xl font-bold text-gold mb-4">{product.price}</p>
                 <div className="mt-auto">
-                  <button className="relative w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gray-900 hover:bg-gold transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold z-10">
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="relative w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gray-900 hover:bg-gold transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold z-10"
+                  >
                     <ShoppingCart className="w-4 h-4 mr-2" />
                     Add to Cart
                   </button>

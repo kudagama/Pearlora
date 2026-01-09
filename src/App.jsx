@@ -1,14 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ProductGrid from './components/ProductGrid';
+import CartSidebar from './components/CartSidebar';
 
 function App() {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (product) => {
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prevItems.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prevItems, { ...product, quantity: 1 }];
+    });
+    setIsCartOpen(true);
+  };
+
+  const removeFromCart = (productId) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+  };
+
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <div className="min-h-screen bg-cream">
-      <Navbar />
+      <Navbar
+        cartCount={totalItems}
+        onCartClick={() => setIsCartOpen(true)}
+      />
+      <CartSidebar
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        cartItems={cartItems}
+        removeFromCart={removeFromCart}
+      />
       <Hero />
-      <ProductGrid />
+      <ProductGrid addToCart={addToCart} />
 
       {/* Footer Placeholder */}
       <footer className="bg-gray-50 border-t border-gray-200">
