@@ -33,11 +33,11 @@
   },
   {
     "id": 5,
-    "name": "Pearl Elegance Set",
-    "price": "$120.00",
-    "category": "Jewelry",
-    "image_url": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    "description": "A stunning necklace and earring set featuring genuine freshwater pearls."
+    "name": "Classic Wooden Frame",
+    "price": "$22.00",
+    "category": "Photo Frames",
+    "image_url": "https://images.unsplash.com/photo-1544000287-0b7ca27bd3c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "description": "A handcrafted oak frame that brings a rustic touch to your home decor."
   },
   {
     "id": 6,
@@ -51,7 +51,7 @@
     "id": 7,
     "name": "Vintage Photo Frame",
     "price": "$35.00",
-    "category": "Photo Frame",
+    "category": "Photo Frames",
     "image_url": "https://images.unsplash.com/photo-1582046487002-86d3e8e92f22?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "description": "Elegant brass photo frame to cherish your most precious memories."
   },

@@ -4,7 +4,7 @@ import { ShoppingCart, ArrowLeft, Plus, Minus } from 'lucide-react';
 import productsData from '../data/products.json';
 import { useCart } from '../context/CartContext';
 import PageTransition from '../components/PageTransition';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -40,7 +40,7 @@ export default function ProductDetail() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Product Image */}
-          <motion.div
+          <Motion.div
             className="bg-gray-100 rounded-lg overflow-hidden shadow-sm"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -51,7 +51,7 @@ export default function ProductDetail() {
               alt={product.name}
               className="w-full h-full object-cover object-center"
             />
-          </motion.div>
+          </Motion.div>
 
           {/* Product Info */}
           <div className="flex flex-col">
@@ -89,7 +89,7 @@ export default function ProductDetail() {
                 </div>
               </div>
 
-              <motion.button
+              <Motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => addToCart(product, quantity)}
@@ -97,7 +97,7 @@ export default function ProductDetail() {
               >
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 Add to Cart
-              </motion.button>
+              </Motion.button>
             </div>
           </div>
         </div>

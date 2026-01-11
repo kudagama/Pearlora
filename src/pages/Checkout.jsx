@@ -3,7 +3,7 @@ import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import PageTransition from '../components/PageTransition';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 
 export default function Checkout() {
   const { cartItems, cartTotal, clearCart } = useCart();
@@ -25,7 +25,7 @@ export default function Checkout() {
     const itemsList = cartItems.map(item => `- ${item.name} x ${item.quantity} (${item.price})`).join('\n');
     const message = `*New Order from Pealora*\n\n*Name:* ${formData.name}\n*WhatsApp:* ${formData.whatsapp}\n*Address:* ${formData.address}\n\n*Items:*\n${itemsList}\n\n*Total:* $${cartTotal.toFixed(2)}`;
 
-    const whatsappUrl = `https://wa.me/94766088374?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/94782959413?text=${encodeURIComponent(message)}`;
 
     // Open WhatsApp in new tab
     window.open(whatsappUrl, '_blank');
@@ -133,14 +133,14 @@ export default function Checkout() {
                     />
                   </div>
 
-                  <motion.button
+                  <Motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     type="submit"
                     className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-900 hover:bg-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold transition-colors duration-300"
                   >
                     Place Order via WhatsApp
-                  </motion.button>
+                  </Motion.button>
                 </div>
               </form>
             </div>
